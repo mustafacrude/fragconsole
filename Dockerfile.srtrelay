@@ -16,6 +16,6 @@ RUN apk update &&\
     mkdir -p /conf
 COPY --from=build /tmp/srtrelay/srtrelay /usr/local/bin/
 COPY --from=build /tmp/srtrelay/config.toml /conf/
-EXPOSE 8080
-EXPOSE 1935/udp
+EXPOSE 8081
+EXPOSE 1337/udp
 ENTRYPOINT [ "srtrelay","-config","/conf/config.toml"]
