@@ -2,20 +2,31 @@ version: "3.9"
 services:
   srtrelay:
     image: "ravenium/srtrelay:latest"
-    ports:
-      - "1337:1337/udp"
+    expose:
+      - "1337/udp"
     networks:
-        - fragforce
+        - dokploy-network
     volumes:
         - $PWD/config.toml:/conf/config.toml
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.srtrelay.rule=Host(`stream.crudes.net`)
+      - traefik.http.routers.srtrelay.entrypoints=web
+      - traefik.http.services.srtrelay.loadbalancer.server.port=1337
   frag_restream_record:
     image: "ravenium/fragconsole:latest"
-    ports:
-        - "3001:3001"
+    expose:
+        - "3001"
     command: -s -serverurl http://srtrelay:8081/streams -streamurl srt://srtrelay:1337 -listen 0.0.0.0:3001
     networks:
-        - fragforce
+        - dokploy-network
     volumes:
         - $PWD/record:/record
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.frag_restream_record.rule=Host(`record.crudes.net`)
+      - traefik.http.routers.frag_restream_record.entrypoints=web
+      - traefik.http.services.frag_restream_record.loadbalancer.server.port=3001
 networks:
-  fragforce:
+  dokploy-network:
+    external: true
