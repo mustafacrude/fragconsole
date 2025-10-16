@@ -3,7 +3,7 @@ services:
   srtrelay:
     image: "ravenium/srtrelay:latest"
     ports:
-      - "1935:1935/udp"
+      - "1337:1337/udp"
     networks:
         - fragforce
     volumes:
@@ -11,8 +11,8 @@ services:
   frag_restream_record:
     image: "ravenium/fragconsole:latest"
     ports:
-        - "3000:3000"
-    command: -s -serverurl http://srtrelay:8080/streams -streamurl srt://srtrelay:1935 -listen 0.0.0.0:3000
+        - "3001:3001"
+    command: -s -serverurl http://srtrelay:8081/streams -streamurl srt://srtrelay:1337 -listen 0.0.0.0:3001
     networks:
         - fragforce
     volumes:
