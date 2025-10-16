@@ -196,16 +196,16 @@ func monitorStreams() {
 }
 
 func main() {
-	flag.StringVar(&srtStatusURL, "serverurl", "http://localhost:8080/streams", "URL of host running SRT status json endpoint")
-	flag.StringVar(&srtStreamURL, "streamurl", "srt://localhost:1935", "srt URL of streaming server")
+	flag.StringVar(&srtStatusURL, "serverurl", "http://localhost:8081/streams", "URL of host running SRT status json endpoint")
+	flag.StringVar(&srtStreamURL, "streamurl", "srt://localhost:1337", "srt URL of streaming server")
 	flag.StringVar(&srtStreamPassword, "playpassword", "", "Password to play srt streams from srtrelay (optional)")
-	flag.StringVar(&listenAddr, "listen", "127.0.0.1:3000", "Listen address for stream viewer")
+	flag.StringVar(&listenAddr, "listen", "127.0.0.1:3001", "Listen address for stream viewer")
 	flag.BoolVar(&recordingMode, "r", false, "Record a copy of incoming streams.")
 	flag.BoolVar(&streamingMode, "s", false, "Create a preview copy of incoming streams.")
 	flag.StringVar(&recordingDir, "recpath", "record", "path for recordings (omit trailling slashes)")
 	flag.IntVar(&pollInterval, "poll", 10, "Interval in seconds to poll for new SRT feeds.")
 	flag.BoolVar(&forwardMode, "f", false, "Forward a copy of incoming streams to another SRT server.")
-	flag.StringVar(&reflectURL, "reflect", "srt://localhost:1935", "SRT url to reflect all streams toward.  Usually used in lieu of recording or preview features.")
+	flag.StringVar(&reflectURL, "reflect", "srt://localhost:1337", "SRT url to reflect all streams toward.  Usually used in lieu of recording or preview features.")
 	flag.IntVar(&processLaunchDelay, "procdelay", 3, "Delay in seconds between ffmpeg/slt process launches.  Tweak if you are getting process exec failures.")
 	flag.Parse()
 
