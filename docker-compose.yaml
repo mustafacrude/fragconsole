@@ -7,7 +7,7 @@ services:
     networks:
         - dokploy-network
     volumes:
-        - $PWD/config.toml:/conf/config.toml
+        - ../home/mustafa/srtrecord/config.toml:/conf/config.toml
     labels:
       - traefik.enable=true
       - traefik.http.routers.srtrelay.rule=Host(`stream.crudes.net`)
@@ -21,7 +21,7 @@ services:
     networks:
         - dokploy-network
     volumes:
-        - $PWD/record:/record
+        - ../home/mustafa/srtrecord/record:/record
     labels:
       - traefik.enable=true
       - traefik.http.routers.frag_restream_record.rule=Host(`record.crudes.net`)
