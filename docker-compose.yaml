@@ -17,7 +17,7 @@ services:
     image: "ravenium/fragconsole:latest"
     expose:
         - "3001"
-    command: -s -serverurl http://srtrelay:8081/streams -streamurl srt://srtrelay:1337 -listen 0.0.0.0:3001
+    command: -s -serverurl http://localhost:8081/streams -streamurl srt://localhost:1337 -listen 0.0.0.0:3001
     networks:
         - dokploy-network
     volumes:
